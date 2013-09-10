@@ -1,0 +1,7 @@
+alias ltr="ls -ltr";
+alias update="sudo yum update";
+alias install="sudo apt-get install";
+alias ll="ls -all";
+alias gl='git log --oneline --all --graph --decorate'
+alias wo='cd /home/franz/Dokumente/work';
+alias sql='rlwrap sqlplus';
