@@ -1,0 +1,92 @@
+set nocompatible
+execute pathogen#infect()
+execute pathogen#helptags()
+filetype indent on
+filetype plugin on
+syntax on
+
+set fileencoding=utf-8
+set encoding=utf-8
+set backspace=indent,eol,start
+set foldmethod=syntax
+set ruler
+set number
+set tabstop=3
+set shiftwidth=3
+set guifont=Courier:h15
+set smartindent
+set autoindent
+set copyindent
+set laststatus=2
+set linespace=3
+" sektion für das suche Text bei der suche hervorheben und dorthin gehen
+" auserdem ist die die normale suche in regex suche geändert
+set hlsearch
+set incsearch
+nnoremap / /\v
+vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
+
+set wildmode=list:longest
+set splitbelow
+set timeoutlen=500
+set showmatch
+set wrap
+set showcmd
+set fileformats=unix,mac,dos
+set smartcase
+set gdefault
+
+set bg=dark
+colors zenburn
+
+set listchars=tab:▸\ ,eol:¬,nbsp:⋅
+set cursorline
+
+"zencoding mit strg e"
+"let g:user_zen_expandabbr_key = '<C-e>'
+iabbrev mysite http://www.franz-rustler.com
+iabbrev myname Franz Rustler
+iabbrev mymail FRanz.rustler@gmail.com
+iabbrev ydate <C-R>=strftime("%c")<CR>
+
+"set dictionary=~/.vim/dictionary.txt
+nmap ,d :cd ~/Dokumente
+nmap ,ev :tabedit $MYVIMRC<cr>
+nmap <space> :
+
+" Nerdtree einträge"
+map <C-n> :NERDTreeToggle<CR>
+
+if has("autocmd")
+		autocmd bufwritepost .vimrc source $MYVIMRC
+
+		autocmd BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\		execute "normal g'\"" |
+				\ endif
+
+		autocmd BufEnter * cd %:p:h
+endif
+
+" Some more highlighting stuff. The first one matches whitespace at end of
+" lines (we don't really like them) and the second one matches tabs, so we
+" are aware of them visually ;-)
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
+
+" mit den folgenden zwei zeilen wird dafür gesorgt das Html text nach dem
+" schreiben bzw. beim öffnen formatiert wird
+autocmd BufRead,BufWritePre *.html normal gg=G
+autocmd BufRead,BufWritePre *.htm normal gg=G
+
+"autocmd für Html files  hier wird \c benutzt um tags auszukomentieren
+autocmd Filetype html nnoremap <buffer> <leader>c I<!--<esc>A--><esc>
+
+"autocmd für JavaScript files  hier wird \c benutzt um tags auszukomentieren
+"auserdem ist ein  tag für \r um text auszumonentieren
+augroup JavaScriptCmds
+	autocmd Filetype javascript nnoremap <buffer> <leader>r :!node %<cr>
+	autocmd Filetype javascript nnoremap <buffer> <leader>c I//<esc>
+augroup END
