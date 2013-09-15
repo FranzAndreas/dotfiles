@@ -1,0 +1,79 @@
+###############################
+### http://www.NoobsLab.com ###
+###############################
+background yes
+font Caliban:size=8
+xftfont Caliban:size=8
+use_xft yes
+xftalpha 0.5
+update_interval 1.0
+total_run_times 0
+own_window_class conky
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+draw_shades yes
+draw_outline yes
+draw_borders no
+draw_graph_borders no
+minimum_size 350
+maximum_width 350
+default_color ffffff
+default_shade_color 000000
+draw_outline no
+alignment top_right
+gap_x 10
+gap_y 36
+no_buffers yes
+cpu_avg_samples 1
+override_utf8_locale no
+uppercase no
+use_spacer none
+
+TEXT
+${goto 99}Kernel: $kernel $machine
+${goto 99}Uptime: $uptime
+${goto 99}${time %a %d. %b %k:%M}
+${goto 99}Users logon: $user_number
+
+${voffset -6}${goto 70}${font Poky:pixelsize=22}T${font}${color 98FB98}${voffset -8} ${battery_bar 6,150 BAT0}${color}  ${battery BAT0} 
+${voffset -8}
+
+${goto 33}${font :style=Bold:pixelsize=12}CPU${voffset -8} ${font Poky:pixelsize=22}P${font} ${voffset -5}${freq_g 1} GHz ${alignc}${voffset -15} ${cpugraph  CPU 20,80 FFF6CD FF0B00 -t}
+${voffset -20}${goto 246}${font :style=Bold:pixelsize=14}${cpu CPU}%${font}
+
+
+
+${voffset -8}${goto 34}${font :style=Bold:pixelsize=12}MEM${font}${voffset -19} ${font Poky:pixelsize=32}a${font}   ${voffset -22}  RAM: $mem v $memmax
+${alignr 50}${color A0CCFF}   ${membar 4,180}${color}
+${goto 120} Swap: $swap v $swapmax
+${goto 120} Load: ${color C7FF8E}$loadavg${color}
+${goto 120} Processes: ${color C7FF8E}$processes${color}
+${goto 120} Running: $running_processes ${color}
+
+${goto 120} Top
+${goto 120} ${top_io name 1} ${top_io io_perc 1} ${top_io cpu 1} ${top_io mem 1}
+${goto 120} ${top_io name 2} ${top_io io_perc 2} ${top_io cpu 2} ${top_io mem 2}
+${goto 120} ${top_io name 3} ${top_io io_perc 3} ${top_io cpu 3} ${top_io mem 3}
+${goto 120} ${top_io name 4} ${top_io io_perc 4} ${top_io cpu 4} ${top_io mem 4}
+${goto 120} ${top_io name 5} ${top_io io_perc 5} ${top_io cpu 5} ${top_io mem 5}
+
+${voffset -8}${goto 33}${font :style=Bold:pixelsize=12}NET${font}${voffset -19} ${font Poky:pixelsize=32}w${font}
+
+${goto 118}${font Poky:pixelsize=22}i${font}${voffset -40} Download: ${downspeed wlan0}
+${goto 148}${voffset -6}${downspeedgraph wlan0 25,150 D9FFDF A5FEB3}
+${goto 148}${voffset -4}Upload: ${upspeed wlan0}
+${goto 148}${voffset -6}${upspeedgraph wlan0 25,150 FEC2A5 FA9C6F}
+${goto 118}${font Poky:pixelsize=22}e${font}
+${goto 148}${voffset -26}Total:  down: ${totaldown wlan0}
+${goto 189}up: ${totalup wlan0}
+${goto 189}IP: ${addr wlan0}
+${goto 189}Public IP: ${execi 3600 ~/.conky/public.sh}
+
+
+${goto 30}${font Poky:pixelsize=52}y${font}
+${voffset -40}${alignc}Root: ${fs_free /} / ${fs_size /}
+${alignc}${color 83A1FF}${fs_bar 4,150 /}${color}
+
