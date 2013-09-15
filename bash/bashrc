@@ -21,3 +21,5 @@ PS1="\n\u@\h:\w \$(vcprompt -f '%b%m%u')\n> "
 
 source  ~/bin/dotfiles/bash/bash_function
 source  ~/bin/dotfiles/bash/bash_alias
+
+alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
